@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://ckt6ecc2t8g42"]
+
+[ext_resource type="PackedScene" uid="uid://ca8pj2wm3lcdu" path="res://Scenes/GridObjects/GridObject.tscn" id="1_on410"]
+[ext_resource type="Script" uid="uid://yjd47kkmdlw5" path="res://Scenes/GridObjects/Objects/cherry.gd" id="2_pubs4"]
+[ext_resource type="Texture2D" uid="uid://cln1eb7lbeopo" path="res://Assets/Sprites/items.png" id="2_rmrui"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ld76n"]
+atlas = ExtResource("2_rmrui")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_432go"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ld76n")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Cherry" instance=ExtResource("1_on410")]
+script = ExtResource("2_pubs4")
+intangible = true
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_432go")

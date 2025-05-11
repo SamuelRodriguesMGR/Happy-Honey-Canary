@@ -1,0 +1,158 @@
+[gd_scene load_steps=9 format=3 uid="uid://dfia0v7odb4vg"]
+
+[ext_resource type="Script" uid="uid://bk8w0nic8vg2w" path="res://Scenes/Game/game.gd" id="1_1l0tm"]
+[ext_resource type="PackedScene" uid="uid://bu6lxbeukwfkn" path="res://Scenes/Level/level_1.tscn" id="2_i1e5p"]
+[ext_resource type="Script" uid="uid://duqfsrgd6wadt" path="res://Scenes/Game/ui.gd" id="4_flgk0"]
+[ext_resource type="Texture2D" uid="uid://btrkkcer558sd" path="res://Assets/Sprites/60sec-Sheet.png" id="4_i1e5p"]
+[ext_resource type="FontFile" uid="uid://rlspynl2ohbe" path="res://Assets/ttf/HarryPotterKudosEN-en.ttf" id="5_ciybh"]
+[ext_resource type="Texture2D" uid="uid://cln1eb7lbeopo" path="res://Assets/Sprites/items.png" id="7_vifcx"]
+[ext_resource type="Texture2D" uid="uid://cqr012n1lvgfj" path="res://Assets/Sprites/help.png" id="7_xfil1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xfil1"]
+atlas = ExtResource("7_vifcx")
+region = Rect2(0, 0, 16, 16)
+
+[node name="Game" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_1l0tm")
+metadata/_edit_lock_ = true
+
+[node name="Level1" parent="." instance=ExtResource("2_i1e5p")]
+metadata/_edit_lock_ = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("4_flgk0")
+
+[node name="TimerDeath" type="Timer" parent="UI"]
+autostart = true
+
+[node name="Panel" type="Panel" parent="UI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 44.0
+offset_top = -22.0
+offset_right = 76.0
+offset_bottom = -3.0
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Panel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 17.0
+offset_bottom = 17.0
+texture = SubResource("AtlasTexture_xfil1")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="UI/Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -15.0
+offset_top = 3.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_ciybh")
+theme_override_font_sizes/font_size = 14
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Menu" type="VBoxContainer" parent="UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.5
+offset_top = -20.0
+offset_right = 24.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="ButtonResume" type="Button" parent="UI/Menu"]
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("5_ciybh")
+theme_override_font_sizes/font_size = 8
+text = "Resume"
+metadata/_edit_lock_ = true
+
+[node name="ButtonReset" type="Button" parent="UI/Menu"]
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("5_ciybh")
+theme_override_font_sizes/font_size = 8
+text = "Start again"
+metadata/_edit_lock_ = true
+
+[node name="Panel2" type="Panel" parent="UI"]
+offset_left = 5.0
+offset_top = 120.0
+offset_right = 41.0
+offset_bottom = 173.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Panel2"]
+modulate = Color(1, 1, 1, 0.862745)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -51.0
+offset_right = 84.0
+offset_bottom = 69.0
+grow_vertical = 0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_i1e5p")
+metadata/_edit_lock_ = true
+
+[node name="LabelDozens" type="Label" parent="UI/Panel2/TextureRect"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 12.0
+offset_top = 44.0
+offset_right = 40.0
+offset_bottom = 67.0
+theme_override_fonts/font = ExtResource("5_ciybh")
+text = "6"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="LabelUnits" type="Label" parent="UI/Panel2/TextureRect"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 44.0
+offset_top = 44.0
+offset_right = 72.0
+offset_bottom = 67.0
+theme_override_fonts/font = ExtResource("5_ciybh")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.4)
+
+[node name="Help" type="Sprite2D" parent="UI/ColorRect"]
+texture = ExtResource("7_xfil1")
+centered = false
+
+[connection signal="timeout" from="UI/TimerDeath" to="UI" method="_on_timer_death_timeout"]
+[connection signal="pressed" from="UI/Menu/ButtonResume" to="UI" method="_on_button_resume_pressed"]
+[connection signal="pressed" from="UI/Menu/ButtonReset" to="UI" method="_on_button_reset_pressed"]

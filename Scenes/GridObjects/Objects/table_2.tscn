@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnrjcd545wgey"]
+
+[ext_resource type="PackedScene" uid="uid://k5w4jwd6lss8" path="res://Scenes/GridObjects/Objects/table.tscn" id="1_4fjcm"]
+
+[node name="Table2" instance=ExtResource("1_4fjcm")]
+
+[node name="Label" parent="Dialog" index="0"]
+text = "But they breed faster than ants!"

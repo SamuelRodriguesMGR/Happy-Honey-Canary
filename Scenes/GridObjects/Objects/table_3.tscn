@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://djyoipgavmmdf"]
+
+[ext_resource type="PackedScene" uid="uid://k5w4jwd6lss8" path="res://Scenes/GridObjects/Objects/table.tscn" id="1_0bsq8"]
+
+[node name="Table3" instance=ExtResource("1_0bsq8")]
+
+[node name="Dialog" parent="." index="2"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -24.445
+offset_top = -63.185
+offset_right = 24.445
+offset_bottom = -10.88
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" parent="Dialog" index="0"]
+text = "These birds help the bears find honey. Amazing!"

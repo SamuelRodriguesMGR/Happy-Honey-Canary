@@ -1,0 +1,100 @@
+[gd_scene load_steps=17 format=3 uid="uid://kyjvoxit3kfo"]
+
+[ext_resource type="Script" uid="uid://dpclx6brhgwkw" path="res://Scenes/Game/tile_map.gd" id="1_06ioy"]
+[ext_resource type="Script" uid="uid://dfo3phiruf6bu" path="res://Scenes/Level/level.gd" id="1_x701m"]
+[ext_resource type="AudioStream" uid="uid://p65345pw3xgw" path="res://Assets/Music/bd6704ab7470ce8.mp3" id="2_t7iwn"]
+[ext_resource type="Texture2D" uid="uid://bmlq18jcpre1x" path="res://Assets/Sprites/tiles.png" id="2_x701m"]
+[ext_resource type="Texture2D" uid="uid://fn1btl7f4727" path="res://Assets/Sprites/Objects.png" id="3_7i4w6"]
+[ext_resource type="AudioStream" uid="uid://c407posnl55ds" path="res://Assets/Music/digiffects-sound-effects-library-capercaillie-bird-in-forest-with-other-birds-version-1.mp3" id="3_k2muv"]
+[ext_resource type="AudioStream" uid="uid://dp3wwjai8ooat" path="res://Assets/Music/les.mp3" id="4_dhxf7"]
+[ext_resource type="Texture2D" uid="uid://b4lahimbcitg6" path="res://Assets/Sprites/grass.png" id="4_q8n36"]
+[ext_resource type="AudioStream" uid="uid://btbfp3qa6p8bb" path="res://Assets/Music/salamisound-1454157-birds-in-the-forest-with-a.mp3" id="5_mkqdc"]
+[ext_resource type="AudioStream" uid="uid://1w1l6lymof30" path="res://Assets/Music/sound-ideas-afternoon-forest-ambience-with-close-and-distant-birds.mp3" id="6_n0xg1"]
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_q72jx"]
+shuffle = true
+stream_count = 5
+stream_0 = ExtResource("2_t7iwn")
+stream_1 = ExtResource("3_k2muv")
+stream_2 = ExtResource("4_dhxf7")
+stream_3 = ExtResource("5_mkqdc")
+stream_4 = ExtResource("6_n0xg1")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_362x8"]
+texture = ExtResource("2_x701m")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_43gce"]
+texture = ExtResource("3_7i4w6")
+0:0/0 = 0
+3:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+4:0/size_in_atlas = Vector2i(1, 2)
+4:0/0 = 0
+4:0/0/texture_origin = Vector2i(0, 8)
+0:1/0 = 0
+3:4/0 = 0
+0:4/0 = 0
+3:1/0 = 0
+2:4/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6rsi7"]
+texture = ExtResource("4_q8n36")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_unl86"]
+sources/0 = SubResource("TileSetAtlasSource_362x8")
+sources/1 = SubResource("TileSetAtlasSource_43gce")
+sources/3 = SubResource("TileSetAtlasSource_6rsi7")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06ioy"]
+atlas = ExtResource("3_7i4w6")
+region = Rect2(0, 32, 16, 16)
+
+[node name="Level" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_x701m")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamPlaylist_q72jx")
+autoplay = true
+
+[node name="TileMap" type="Node2D" parent="."]
+y_sort_enabled = true
+script = ExtResource("1_06ioy")
+metadata/_edit_lock_ = true
+
+[node name="LayerFloor" type="TileMapLayer" parent="TileMap"]
+tile_set = SubResource("TileSet_unl86")
+metadata/_edit_lock_ = true
+
+[node name="LayerGrass" type="TileMapLayer" parent="TileMap"]
+tile_set = SubResource("TileSet_unl86")
+metadata/_edit_lock_ = true
+
+[node name="LayerWall" type="TileMapLayer" parent="TileMap"]
+z_index = 1
+y_sort_enabled = true
+tile_set = SubResource("TileSet_unl86")
+metadata/_edit_lock_ = true
+
+[node name="Nest" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_06ioy")

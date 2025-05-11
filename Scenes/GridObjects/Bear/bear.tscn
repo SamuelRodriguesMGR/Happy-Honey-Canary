@@ -1,0 +1,95 @@
+[gd_scene load_steps=13 format=3 uid="uid://d2l308beeesl2"]
+
+[ext_resource type="PackedScene" uid="uid://ca8pj2wm3lcdu" path="res://Scenes/GridObjects/GridObject.tscn" id="1_v6ws6"]
+[ext_resource type="Script" uid="uid://qkjttevgvhd8" path="res://Scenes/GridObjects/Bear/bear.gd" id="2_823tc"]
+[ext_resource type="Texture2D" uid="uid://c158tw4sdcphc" path="res://Assets/Sprites/bear-Sheet.png" id="2_majy4"]
+[ext_resource type="Script" uid="uid://cxkm1h4g60l7q" path="res://Scenes/Components/pushable_component.gd" id="3_l8ve2"]
+[ext_resource type="FontFile" uid="uid://chbgf6cpttu5y" path="res://Assets/ttf/Monocraft.otf" id="4_nj8nt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8ve2"]
+atlas = ExtResource("2_majy4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nj8nt"]
+atlas = ExtResource("2_majy4")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_823tc"]
+atlas = ExtResource("2_majy4")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3jin6"]
+atlas = ExtResource("2_majy4")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqtne"]
+atlas = ExtResource("2_majy4")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hp15f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8ve2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nj8nt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_823tc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3jin6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fqtne")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_823tc"]
+bg_color = Color(0, 0, 0, 0.498039)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[node name="Bear" groups=["BearGroup"] instance=ExtResource("1_v6ws6")]
+script = ExtResource("2_823tc")
+rotating = true
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_hp15f")
+autoplay = "default"
+
+[node name="PushableComponent" type="Node" parent="." index="1"]
+script = ExtResource("3_l8ve2")
+metadata/_custom_type_script = "uid://cxkm1h4g60l7q"
+
+[node name="Dialog" type="Panel" parent="." index="2"]
+z_index = 99
+offset_left = -20.0
+offset_top = -32.0
+offset_right = 20.0
+offset_bottom = -14.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_823tc")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Dialog" index="0"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_nj8nt")
+theme_override_font_sizes/font_size = 6
+text = "Give me a
+honey"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+metadata/_edit_lock_ = true

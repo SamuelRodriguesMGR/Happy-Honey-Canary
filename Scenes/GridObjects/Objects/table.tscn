@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://k5w4jwd6lss8"]
+
+[ext_resource type="PackedScene" uid="uid://ca8pj2wm3lcdu" path="res://Scenes/GridObjects/GridObject.tscn" id="1_eg0yd"]
+[ext_resource type="Script" uid="uid://cp71chgogqw0m" path="res://Scenes/GridObjects/Objects/table.gd" id="2_1vjmo"]
+[ext_resource type="Texture2D" uid="uid://fn1btl7f4727" path="res://Assets/Sprites/Objects.png" id="2_j4okf"]
+[ext_resource type="Script" uid="uid://cc37pky1gjwl2" path="res://Scenes/Components/interactable_component.gd" id="3_j72wu"]
+[ext_resource type="FontFile" uid="uid://chbgf6cpttu5y" path="res://Assets/ttf/Monocraft.otf" id="5_s1vgo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j72wu"]
+atlas = ExtResource("2_j4okf")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1vjmo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j72wu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lfaua"]
+bg_color = Color(0, 0, 0, 0.498039)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[node name="Table" instance=ExtResource("1_eg0yd")]
+script = ExtResource("2_1vjmo")
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_1vjmo")
+
+[node name="InteractableComponent" type="Node" parent="." index="1"]
+script = ExtResource("3_j72wu")
+metadata/_custom_type_script = "uid://cc37pky1gjwl2"
+
+[node name="Dialog" type="Panel" parent="." index="2"]
+visible = false
+z_index = 99
+offset_left = -20.0
+offset_top = -60.315
+offset_right = 20.0
+offset_bottom = -8.01
+theme_override_styles/panel = SubResource("StyleBoxFlat_lfaua")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Dialog" index="0"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_s1vgo")
+theme_override_font_sizes/font_size = 6
+text = "The honey canary lives for only 60 seconds"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+metadata/_edit_lock_ = true
+
+[connection signal="just_interacted" from="InteractableComponent" to="." method="_on_interactable_component_just_interacted"]

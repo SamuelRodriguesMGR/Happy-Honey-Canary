@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://ywjeyr2ga8s1"]
+
+[ext_resource type="PackedScene" uid="uid://ca8pj2wm3lcdu" path="res://Scenes/GridObjects/GridObject.tscn" id="1_n540a"]
+[ext_resource type="Texture2D" uid="uid://cln1eb7lbeopo" path="res://Assets/Sprites/items.png" id="2_1x55u"]
+[ext_resource type="Script" uid="uid://b6ktvtd7v4ddr" path="res://Scenes/GridObjects/Objects/jar_honey.gd" id="2_2e75f"]
+[ext_resource type="Script" uid="uid://cc37pky1gjwl2" path="res://Scenes/Components/interactable_component.gd" id="3_bgm74"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgm74"]
+atlas = ExtResource("2_1x55u")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2e75f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bgm74")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="jarHoney" instance=ExtResource("1_n540a")]
+script = ExtResource("2_2e75f")
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_2e75f")
+
+[node name="InteractableComponent" type="Node" parent="." index="1"]
+script = ExtResource("3_bgm74")
+metadata/_custom_type_script = "uid://cc37pky1gjwl2"
+
+[connection signal="just_interacted" from="InteractableComponent" to="." method="_on_interactable_component_just_interacted"]

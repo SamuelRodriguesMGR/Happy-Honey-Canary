@@ -1,0 +1,134 @@
+[gd_scene load_steps=21 format=3 uid="uid://pli4e7lyw3mp"]
+
+[ext_resource type="PackedScene" uid="uid://ca8pj2wm3lcdu" path="res://Scenes/GridObjects/GridObject.tscn" id="1_hayn0"]
+[ext_resource type="Script" uid="uid://c800g7nep72nf" path="res://Scenes/GridObjects/Player/player.gd" id="2_ctcio"]
+[ext_resource type="Texture2D" uid="uid://ch57kat2ewo5n" path="res://Assets/Sprites/player-Sheet.png" id="4_apx8m"]
+[ext_resource type="Texture2D" uid="uid://dbsalaoefnre6" path="res://Assets/Sprites/player_spawn-Sheet.png" id="4_iiqsu"]
+[ext_resource type="Script" uid="uid://cxkm1h4g60l7q" path="res://Scenes/Components/pushable_component.gd" id="5_mdma1"]
+[ext_resource type="AudioStream" uid="uid://c7axysk7xl3d5" path="res://Assets/Sounds/63fb7a856133ad6.mp3" id="5_qhtdu"]
+[ext_resource type="Script" uid="uid://be43ici83lyhc" path="res://Scenes/Components/path_component.gd" id="6_iiqsu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fu1fx"]
+atlas = ExtResource("4_apx8m")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dxcao"]
+atlas = ExtResource("4_apx8m")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1mdwi"]
+atlas = ExtResource("4_apx8m")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8gg06"]
+atlas = ExtResource("4_apx8m")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhtdu"]
+atlas = ExtResource("4_iiqsu")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hldwu"]
+atlas = ExtResource("4_iiqsu")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hue43"]
+atlas = ExtResource("4_iiqsu")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kom8y"]
+atlas = ExtResource("4_iiqsu")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3lgl"]
+atlas = ExtResource("4_iiqsu")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5pdbp"]
+atlas = ExtResource("4_iiqsu")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vnf8i"]
+atlas = ExtResource("4_iiqsu")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehdnd"]
+atlas = ExtResource("4_iiqsu")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qqvsf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fu1fx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dxcao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1mdwi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8gg06")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhtdu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hldwu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hue43")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kom8y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j3lgl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5pdbp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vnf8i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ehdnd")
+}],
+"loop": false,
+"name": &"spawn",
+"speed": 5.0
+}]
+
+[node name="Player" instance=ExtResource("1_hayn0")]
+script = ExtResource("2_ctcio")
+rotating = true
+is_enable = true
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_qqvsf")
+animation = &"spawn"
+autoplay = "spawn"
+frame_progress = 0.261259
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="1"]
+stream = ExtResource("5_qhtdu")
+volume_db = 3.0
+pitch_scale = 2.0
+
+[node name="DelayMouse" type="Timer" parent="." index="2"]
+wait_time = 0.1
+one_shot = true
+
+[node name="PushableComponent" type="Node" parent="." index="3"]
+script = ExtResource("5_mdma1")
+metadata/_custom_type_script = "uid://cxkm1h4g60l7q"
+
+[node name="PathComponent" type="Node" parent="." index="4"]
+script = ExtResource("6_iiqsu")
+metadata/_custom_type_script = "uid://be43ici83lyhc"

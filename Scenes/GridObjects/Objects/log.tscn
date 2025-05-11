@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://bit3g0yc24isa"]
+
+[ext_resource type="PackedScene" uid="uid://ca8pj2wm3lcdu" path="res://Scenes/GridObjects/GridObject.tscn" id="1_qgjp1"]
+[ext_resource type="Texture2D" uid="uid://fn1btl7f4727" path="res://Assets/Sprites/Objects.png" id="2_wsmdi"]
+[ext_resource type="Script" uid="uid://cxkm1h4g60l7q" path="res://Scenes/Components/pushable_component.gd" id="3_u58n3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2thqp"]
+atlas = ExtResource("2_wsmdi")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_04cky"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2thqp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Log" instance=ExtResource("1_qgjp1")]
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_04cky")
+
+[node name="PushableComponent" type="Node" parent="." index="1"]
+script = ExtResource("3_u58n3")
+metadata/_custom_type_script = "uid://cxkm1h4g60l7q"
